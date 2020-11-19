@@ -22,7 +22,7 @@ public:
 	}
 	virtual ~People() {
 		cout << name << " " << surname << endl;
-		printf("~Nationality()\n");
+		printf("~People()\n");
 	}
 	void Change_surname(string surn) {
 		surname = surn;
@@ -60,6 +60,28 @@ void Nationality:: eat(){
 	cout << "—ъел ущпущмак на завтрак " << endl;
 }
 
+class NewPeople {
+protected:
+	People *p;
+public:
+	NewPeople() {
+		p = new People();
+		printf("NewPeople()\n");
+	}
+	NewPeople(string name, string sername) {
+		printf("NewPeople(string name, string surname)\n");
+		p = new People(name, sername);
+	}
+	NewPeople(const NewPeople& N) {
+		printf("People(const Point &n)\n");
+		p = new People(*(N.p));
+	}
+	~NewPeople() {
+		delete p;
+		printf("~NewPeople()\n");
+	}
+};
+
 int main() {
 	setlocale(LC_ALL, "rus");
 	{
@@ -83,7 +105,7 @@ int main() {
 	{
 		cout << "-------------------" << endl;
 		Nationality *N = new Nationality("Mamduh", "Baizigitov", "Tatar");
-		Nationality* Q = new Nationality("Niyaz", "Fazlyev", "Bashkir");
+		Nationality* Q = new Nationality("Yra", "Ivanov", "Russian");
 		Q->sound();
 		N->sound();
 		N->eat();
@@ -93,8 +115,14 @@ int main() {
 	}
 	{
 		cout << "-------------------" << endl;
-		People* Q = new Nationality("Niyaz", "Fazlyev", "Bashkir");
+		People* Q = new Nationality("Yra", "Ivanov", "Russian");
 		delete Q;
+		cout << "-------------------" << endl;
+	}
+	{
+		cout << "-------------------" << endl;
+		NewPeople* k = new NewPeople("Valenok", "Poteranyi");
+		delete k;
 		cout << "-------------------" << endl;
 	}
 
